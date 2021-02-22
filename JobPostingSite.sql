@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 09, 2021 at 03:25 AM
+-- Generation Time: Feb 22, 2021 at 05:34 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -13,6 +13,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `JobPostingSite`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobpostings`
+--
+
+CREATE TABLE `jobpostings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `location` text COLLATE utf8mb4_unicode_ci,
+  `salary` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `type` text COLLATE utf8mb4_unicode_ci,
+  `postedOn` text COLLATE utf8mb4_unicode_ci,
+  `qualifications` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobpostings`
+--
+
+INSERT INTO `jobpostings` (`id`, `title`, `location`, `salary`, `description`, `type`, `postedOn`, `qualifications`, `created_at`, `updated_at`) VALUES
+(1, 'Software Developer', 'Phoeniz, AZ', '$26.00 an hour', 'great opportunity for interns', 'Intern', 'Intern', 'school', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -31,9 +57,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2021_02_08_223616_create_profiles_table', 1);
+(8, '2021_02_21_101055_create_portfolio_table', 1),
+(26, '2014_10_12_000000_create_users_table', 2),
+(27, '2014_10_12_100000_create_password_resets_table', 2),
+(28, '2021_02_08_223616_create_profiles_table', 2),
+(29, '2021_02_21_101621_create_portfolios_table', 2),
+(30, '2021_02_22_022001_create_jobpostings_table', 2);
 
 -- --------------------------------------------------------
 
@@ -50,20 +79,40 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `portfolios`
+--
+
+CREATE TABLE `portfolios` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `education` text COLLATE utf8mb4_unicode_ci,
+  `licenseAndCertifications` text COLLATE utf8mb4_unicode_ci,
+  `skills` text COLLATE utf8mb4_unicode_ci,
+  `experience` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `portfolios`
+--
+
+INSERT INTO `portfolios` (`id`, `user_id`, `education`, `licenseAndCertifications`, `skills`, `experience`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL, NULL, 'Edit Me!', '2021-02-22 12:17:48', '2021-02-22 12:17:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `profiles`
 --
 
 CREATE TABLE `profiles` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `education` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `about` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `licenseAndCertifications` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `skills` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `experience` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `headline` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `about` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -72,9 +121,8 @@ CREATE TABLE `profiles` (
 -- Dumping data for table `profiles`
 --
 
-INSERT INTO `profiles` (`id`, `user_id`, `image`, `headline`, `location`, `education`, `about`, `licenseAndCertifications`, `skills`, `experience`, `created_at`, `updated_at`) VALUES
-(1, 1, 'profile/c83kCEhDrEDqg7MUMaBwGN1TLn28bsXChiXIn5UH.png', 'Ana Sanchez', 'Phoeniz, AZ', 'Grand Canyon University', 'Heloooo this is Ana', 'Coding certs', 'none', 'a lot', '2021-02-09 10:04:32', '2021-02-09 10:04:50'),
-(2, 2, '', 'Kacey Morris', '', '', '', '', '', '', '2021-02-09 10:19:01', '2021-02-09 10:19:01');
+INSERT INTO `profiles` (`id`, `user_id`, `image`, `headline`, `location`, `about`, `created_at`, `updated_at`) VALUES
+(1, 1, 'profile/vEwg7TwpudcT1srQBbeJUZXpfGw3y7BrUIruPYCp.jpg', 'Edit Me!', 'Phoeniz, AZ', 'Heloooo this is Ana', '2021-02-22 12:17:48', '2021-02-22 12:18:01');
 
 -- --------------------------------------------------------
 
@@ -100,12 +148,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `suspended`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ana Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$oNZ2LmXCWl5v4QrZ6UVd2evFXguscGCR2/nLbG3h.m4.m0WhFpdhi', NULL, 'admin', NULL, '2021-02-09 10:04:32', '2021-02-09 10:04:32'),
-(2, 'Kacey Morris', 'kk@gmail.com', NULL, '$2y$10$yw3K3GKHx.R9ugMDsgBZEuPh30wPUVE0g.tVs2HBE2GiKIA1keIl.', NULL, 'default', NULL, '2021-02-09 10:19:01', '2021-02-09 10:19:01');
+(1, 'Ana Valeria Valeria Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$5OggYa38Gu/AqFX/UDCl2evPy4N5ccPfd4Y.0PZ24fWkK1dNMkNbq', NULL, 'admin', NULL, '2021-02-22 12:17:48', '2021-02-22 12:17:48');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `jobpostings`
+--
+ALTER TABLE `jobpostings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -118,6 +171,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `portfolios`
+--
+ALTER TABLE `portfolios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `portfolios_user_id_index` (`user_id`);
 
 --
 -- Indexes for table `profiles`
@@ -138,19 +198,31 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `jobpostings`
+--
+ALTER TABLE `jobpostings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `portfolios`
+--
+ALTER TABLE `portfolios`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
