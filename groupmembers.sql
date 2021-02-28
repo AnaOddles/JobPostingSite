@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 28, 2021 at 04:11 AM
+-- Generation Time: Feb 28, 2021 at 08:30 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -39,10 +39,10 @@ CREATE TABLE `groupmembers` (
 
 INSERT INTO `groupmembers` (`groupid`, `userid`) VALUES
 (1, 1),
-(1, 2),
 (1, 3),
 (2, 3),
-(3, 3);
+(4, 1),
+(4, 3);
 
 --
 -- Indexes for dumped tables
@@ -62,7 +62,7 @@ ALTER TABLE `groupmembers`
 -- Constraints for table `groupmembers`
 --
 ALTER TABLE `groupmembers`
-  ADD CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `affinitygroup` (`groupid`);
+  ADD CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `affinitygroup` (`groupid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

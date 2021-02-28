@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 28, 2021 at 04:11 AM
+-- Generation Time: Feb 28, 2021 at 08:30 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -39,9 +39,9 @@ CREATE TABLE `affinitygroup` (
 --
 
 INSERT INTO `affinitygroup` (`groupid`, `grouptitle`, `groupdescription`) VALUES
-(1, 'Students', 'A group for students to come together and try to get jobs'),
+(1, 'StudentsEdited', 'A group for students'),
 (2, 'Employers', 'Group for employers'),
-(3, 'Java', 'Group for java developers');
+(4, 'Java', 'Group for java devs');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +61,7 @@ ALTER TABLE `affinitygroup`
 -- AUTO_INCREMENT for table `affinitygroup`
 --
 ALTER TABLE `affinitygroup`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
