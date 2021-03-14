@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 22, 2021 at 05:34 AM
+-- Generation Time: Mar 14, 2021 at 12:43 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -17,17 +17,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `affinitygroup`
+--
+
+CREATE TABLE `affinitygroup` (
+  `groupid` int(11) NOT NULL,
+  `grouptitle` varchar(50) NOT NULL,
+  `groupdescription` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `affinitygroup`
+--
+
+INSERT INTO `affinitygroup` (`groupid`, `grouptitle`, `groupdescription`) VALUES
+(1, 'StudentsEdited', 'A group for students'),
+(2, 'Employers', 'Group for employers'),
+(4, 'Java', 'Group for java devs');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groupmembers`
+--
+
+CREATE TABLE `groupmembers` (
+  `groupid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `groupmembers`
+--
+
+INSERT INTO `groupmembers` (`groupid`, `userid`) VALUES
+(1, 3),
+(2, 3),
+(4, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobpostings`
 --
 
 CREATE TABLE `jobpostings` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` text COLLATE utf8mb4_unicode_ci,
+  `company` text COLLATE utf8mb4_unicode_ci,
   `location` text COLLATE utf8mb4_unicode_ci,
   `salary` text COLLATE utf8mb4_unicode_ci,
   `description` text COLLATE utf8mb4_unicode_ci,
   `type` text COLLATE utf8mb4_unicode_ci,
-  `postedOn` text COLLATE utf8mb4_unicode_ci,
+  `postedOn` date DEFAULT NULL,
   `qualifications` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -37,8 +79,9 @@ CREATE TABLE `jobpostings` (
 -- Dumping data for table `jobpostings`
 --
 
-INSERT INTO `jobpostings` (`id`, `title`, `location`, `salary`, `description`, `type`, `postedOn`, `qualifications`, `created_at`, `updated_at`) VALUES
-(1, 'Software Developer', 'Phoeniz, AZ', '$26.00 an hour', 'great opportunity for interns', 'Intern', 'Intern', 'school', NULL, NULL);
+INSERT INTO `jobpostings` (`id`, `title`, `company`, `location`, `salary`, `description`, `type`, `postedOn`, `qualifications`, `created_at`, `updated_at`) VALUES
+(9, 'Software Developer', 'Grand Canyon University', 'Phoeniz, AZ', '$26.00 an hour', 'great opportunity for interns', 'Internship', '2021-03-09', 'Javascript, React, Python, Machine Learning', NULL, NULL),
+(10, 'Customer Service Representative', 'Google', 'California', '$20.00 an hour', 'newly graduates welcome', 'Full Time', '2021-03-14', 'bachelors', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -58,11 +101,11 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2021_02_21_101055_create_portfolio_table', 1),
-(26, '2014_10_12_000000_create_users_table', 2),
-(27, '2014_10_12_100000_create_password_resets_table', 2),
-(28, '2021_02_08_223616_create_profiles_table', 2),
-(29, '2021_02_21_101621_create_portfolios_table', 2),
-(30, '2021_02_22_022001_create_jobpostings_table', 2);
+(31, '2014_10_12_000000_create_users_table', 2),
+(32, '2014_10_12_100000_create_password_resets_table', 2),
+(33, '2021_02_08_223616_create_profiles_table', 2),
+(34, '2021_02_21_101621_create_portfolios_table', 2),
+(35, '2021_02_22_022001_create_jobpostings_table', 2);
 
 -- --------------------------------------------------------
 
@@ -98,7 +141,7 @@ CREATE TABLE `portfolios` (
 --
 
 INSERT INTO `portfolios` (`id`, `user_id`, `education`, `licenseAndCertifications`, `skills`, `experience`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL, NULL, 'Edit Me!', '2021-02-22 12:17:48', '2021-02-22 12:17:48');
+(1, 1, NULL, NULL, NULL, 'Edit Me!', '2021-03-09 15:10:57', '2021-03-09 15:10:57');
 
 -- --------------------------------------------------------
 
@@ -122,7 +165,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `image`, `headline`, `location`, `about`, `created_at`, `updated_at`) VALUES
-(1, 1, 'profile/vEwg7TwpudcT1srQBbeJUZXpfGw3y7BrUIruPYCp.jpg', 'Edit Me!', 'Phoeniz, AZ', 'Heloooo this is Ana', '2021-02-22 12:17:48', '2021-02-22 12:18:01');
+(1, 1, NULL, 'Edit Me!', NULL, NULL, '2021-03-09 15:10:57', '2021-03-09 15:10:57');
 
 -- --------------------------------------------------------
 
@@ -148,11 +191,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `suspended`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ana Valeria Valeria Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$5OggYa38Gu/AqFX/UDCl2evPy4N5ccPfd4Y.0PZ24fWkK1dNMkNbq', NULL, 'admin', NULL, '2021-02-22 12:17:48', '2021-02-22 12:17:48');
+(1, 'Ana Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$EM9iibfYFgn.CZ/F8RlQqOrVzT2uly9TJYvS2oLPAzuiV0IvDkXmS', NULL, 'admin', NULL, '2021-03-09 15:10:57', '2021-03-09 15:10:57');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `affinitygroup`
+--
+ALTER TABLE `affinitygroup`
+  ADD PRIMARY KEY (`groupid`);
+
+--
+-- Indexes for table `groupmembers`
+--
+ALTER TABLE `groupmembers`
+  ADD PRIMARY KEY (`groupid`,`userid`);
 
 --
 -- Indexes for table `jobpostings`
@@ -198,16 +253,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `affinitygroup`
+--
+ALTER TABLE `affinitygroup`
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `jobpostings`
 --
 ALTER TABLE `jobpostings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `portfolios`
@@ -226,3 +287,13 @@ ALTER TABLE `profiles`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `groupmembers`
+--
+ALTER TABLE `groupmembers`
+  ADD CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `affinitygroup` (`groupid`) ON DELETE CASCADE ON UPDATE CASCADE;
