@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 14, 2021 at 12:43 AM
+-- Generation Time: Mar 14, 2021 at 10:38 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -51,9 +51,85 @@ CREATE TABLE `groupmembers` (
 --
 
 INSERT INTO `groupmembers` (`groupid`, `userid`) VALUES
+(1, 1),
 (1, 3),
 (2, 3),
+(4, 1),
 (4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobapplication`
+--
+
+CREATE TABLE `jobapplication` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `jobposting_id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobapplication`
+--
+
+INSERT INTO `jobapplication` (`id`, `user_id`, `jobposting_id`, `first_name`, `last_name`, `email`, `created_at`, `updated_at`) VALUES
+(128, 1, 1, 'Ana', 'Sanchez', 'ana2140448@maricopa.edu', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobapplicationcontactinfo`
+--
+
+CREATE TABLE `jobapplicationcontactinfo` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `jobapplication_id` bigint(20) UNSIGNED NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobapplicationcontactinfo`
+--
+
+INSERT INTO `jobapplicationcontactinfo` (`id`, `jobapplication_id`, `address`, `city`, `state`, `country`, `zip_code`, `phone`, `created_at`, `updated_at`) VALUES
+(11, 128, '3837 W Acapulco Ln', 'Phoenix', 'AZ', 'United States', '85053', '16023968163', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobapplicationqualifications`
+--
+
+CREATE TABLE `jobapplicationqualifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `jobapplication_id` bigint(20) UNSIGNED NOT NULL,
+  `education` text COLLATE utf8mb4_unicode_ci,
+  `licenseAndCertifications` text COLLATE utf8mb4_unicode_ci,
+  `skills` text COLLATE utf8mb4_unicode_ci,
+  `experience` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobapplicationqualifications`
+--
+
+INSERT INTO `jobapplicationqualifications` (`id`, `jobapplication_id`, `education`, `licenseAndCertifications`, `skills`, `experience`, `created_at`, `updated_at`) VALUES
+(9, 128, 'Bachelor\'s Of Science in Software Development', 'Coding certs', 'some', 'my experience', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -80,8 +156,7 @@ CREATE TABLE `jobpostings` (
 --
 
 INSERT INTO `jobpostings` (`id`, `title`, `company`, `location`, `salary`, `description`, `type`, `postedOn`, `qualifications`, `created_at`, `updated_at`) VALUES
-(9, 'Software Developer', 'Grand Canyon University', 'Phoeniz, AZ', '$26.00 an hour', 'great opportunity for interns', 'Internship', '2021-03-09', 'Javascript, React, Python, Machine Learning', NULL, NULL),
-(10, 'Customer Service Representative', 'Google', 'California', '$20.00 an hour', 'newly graduates welcome', 'Full Time', '2021-03-14', 'bachelors', NULL, NULL);
+(1, 'Software Developer', 'Grand Canyon University', 'Phoeniz, AZ', '$26.00 an hour', 'great opportunity for interns', 'Intern', '2021-03-14', 'Javascript, React, Python, Machine Learning', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,12 +175,14 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(8, '2021_02_21_101055_create_portfolio_table', 1),
-(31, '2014_10_12_000000_create_users_table', 2),
-(32, '2014_10_12_100000_create_password_resets_table', 2),
-(33, '2021_02_08_223616_create_profiles_table', 2),
-(34, '2021_02_21_101621_create_portfolios_table', 2),
-(35, '2021_02_22_022001_create_jobpostings_table', 2);
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2021_02_08_223616_create_profiles_table', 1),
+(4, '2021_02_21_101621_create_portfolios_table', 1),
+(5, '2021_02_22_022001_create_jobpostings_table', 1),
+(6, '2021_03_14_072248_create_jobapplication_table', 1),
+(7, '2021_03_14_073346_create_jobapplicationcontactinfo_table', 1),
+(8, '2021_03_14_073737_create_jobapplicationqualifications_table', 1);
 
 -- --------------------------------------------------------
 
@@ -141,7 +218,7 @@ CREATE TABLE `portfolios` (
 --
 
 INSERT INTO `portfolios` (`id`, `user_id`, `education`, `licenseAndCertifications`, `skills`, `experience`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL, NULL, 'Edit Me!', '2021-03-09 15:10:57', '2021-03-09 15:10:57');
+(1, 1, NULL, NULL, NULL, 'Edit Me!', '2021-03-14 17:57:10', '2021-03-14 17:57:10');
 
 -- --------------------------------------------------------
 
@@ -165,7 +242,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `image`, `headline`, `location`, `about`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'Edit Me!', NULL, NULL, '2021-03-09 15:10:57', '2021-03-09 15:10:57');
+(1, 1, NULL, 'Edit Me!', NULL, NULL, '2021-03-14 17:57:10', '2021-03-14 17:57:10');
 
 -- --------------------------------------------------------
 
@@ -191,7 +268,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `suspended`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ana Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$EM9iibfYFgn.CZ/F8RlQqOrVzT2uly9TJYvS2oLPAzuiV0IvDkXmS', NULL, 'admin', NULL, '2021-03-09 15:10:57', '2021-03-09 15:10:57');
+(1, 'Ana Sanchez', 'ana2140448@maricopa.edu', NULL, '$2y$10$yNloV6cKeaWG.WWnINOlc.pxY1inzKleCSqz2/OPHeOnF8f7mjeqS', NULL, 'admin', NULL, '2021-03-14 17:57:10', '2021-03-14 17:57:10');
 
 --
 -- Indexes for dumped tables
@@ -208,6 +285,28 @@ ALTER TABLE `affinitygroup`
 --
 ALTER TABLE `groupmembers`
   ADD PRIMARY KEY (`groupid`,`userid`);
+
+--
+-- Indexes for table `jobapplication`
+--
+ALTER TABLE `jobapplication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobapplication_user_id_index` (`user_id`),
+  ADD KEY `jobapplication_jobposting_id_index` (`jobposting_id`);
+
+--
+-- Indexes for table `jobapplicationcontactinfo`
+--
+ALTER TABLE `jobapplicationcontactinfo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobapplicationcontactinfo_jobapplication_id_index` (`jobapplication_id`);
+
+--
+-- Indexes for table `jobapplicationqualifications`
+--
+ALTER TABLE `jobapplicationqualifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobapplicationqualifications_jobapplication_id_index` (`jobapplication_id`);
 
 --
 -- Indexes for table `jobpostings`
@@ -259,16 +358,34 @@ ALTER TABLE `affinitygroup`
   MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `jobapplication`
+--
+ALTER TABLE `jobapplication`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+
+--
+-- AUTO_INCREMENT for table `jobapplicationcontactinfo`
+--
+ALTER TABLE `jobapplicationcontactinfo`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `jobapplicationqualifications`
+--
+ALTER TABLE `jobapplicationqualifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `jobpostings`
 --
 ALTER TABLE `jobpostings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `portfolios`
