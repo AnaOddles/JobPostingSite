@@ -1,5 +1,7 @@
 # These things need to be altered for the deployment: 
 
+## https://jobpostingsite-runtimeerror.azurewebsites.net/
+
 ## After uploading the JobPostingSite.zip contents into the myapp directory and setting up database...
 
 ### 1) Access the .env file in the root directory and alter to this: 
