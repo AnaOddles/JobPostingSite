@@ -3,13 +3,13 @@
 ## After uploading the JobPostingSite.zip contents into the myapp directory and setting up database...
 
 ### 1) Access the .env file in the root directory and alter to this: 
-      ```DB_CONNECTION=mysql
+      DB_CONNECTION=mysql
       DB_HOST=127.0.0.1
       DB_PORT=54668
       DB_DATABASE=JobPostingSite
       DB_USERNAME=azure
       DB_PASSWORD='6#vWHD_$'
-      ```
+      
 
 This establishes a connection to our Azure database automatically however we must use the Azure connection string. 
   
@@ -22,9 +22,9 @@ This establishes a connection to our Azure database automatically however we mus
   The affinity groups uses a separate connection to the DB so we need to alter the connection to the azure DB 
   Change the connections server name, username, password 
            
-        ```$this->serverName = "127.0.0.1:54668";
+        $this->serverName = "127.0.0.1:54668";
         $this->username = "azure";
-        $this->password = "6#vWHD_$";```
+        $this->password = "6#vWHD_$";
         
   ### 4) Remove the /public from azure URL 
   We can hide the /public from the URL by using a virtual path, DOES NOT REMOVE BUT HIDES/REPLACES IT 
