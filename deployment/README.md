@@ -8,7 +8,7 @@ After uploading the JobPostingSite.zip contents into the myapp directory and set
       DB_PORT=54668
       DB_DATABASE=JobPostingSite
       DB_USERNAME=azure
-      DB_PASSWORD='6#vWHD_$'`
+      DB_PASSWORD='6#vWHD_$'```
 
 This establishes a connection to our Azure database automatically however we must use the Azure connection string. 
   
