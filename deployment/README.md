@@ -3,12 +3,12 @@ These things need to be altered for the deployment:
 After uploading the JobPostingSite.zip contents into the myapp directory and setting up database...
 
 1) Access the .env file in the root directory and alter to this: 
-  `<addr>`DB_CONNECTION=mysql
+  `<DB_CONNECTION=mysql
      DB_HOST=127.0.0.1
       DB_PORT=54668
       DB_DATABASE=JobPostingSite
       DB_USERNAME=azure
-      DB_PASSWORD='6#vWHD_$'`<addr>`
+      DB_PASSWORD='6#vWHD_$'>`
 
 This establishes a connection to our Azure database automatically however we must use the Azure connection string. 
   
