@@ -21,7 +21,7 @@ This establishes a connection to our Azure database automatically however we mus
   ### 3) Affinity Groups - services/data/Utility/DbConnect
   The affinity groups uses a separate connection to the DB so we need to alter the connection to the azure DB 
   Change the connections server name, username, password 
-       ```php
+            ```php
         $this->serverName = "127.0.0.1:54668";
         $this->username = "azure";
         $this->password = "6#vWHD_$";```
